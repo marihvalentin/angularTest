@@ -3,7 +3,6 @@ import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
 import { Observable, of} from 'rxjs';
 import { MessageService} from './message.service';
-import { timeStamp } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +16,9 @@ getHeroes(): Observable<Hero[]> {
 }
 
   constructor(private MessageService: MessageService) { }
+
+  getHero(id: number): Observable<Hero> {
+    this.MessageService.add(`HeroService: fetched hero id=${id}`);
+    return of(HEROES.find(hero => hero.id === id));
+  }
 }
